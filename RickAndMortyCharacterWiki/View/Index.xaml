@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodel="clr-namespace:RickAndMortyCharacterWiki.ViewModel"
+             x:Class="RickAndMortyCharacterWiki.View.Index">
+    <ContentPage.BindingContext>
+        <viewmodel:IndexViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <!--<StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>-->
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
+                <StackLayout 
+                    HeightRequest="30"
+                    Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Previous" IsEnabled="{Binding HasPrevious}" Command="{Binding GetPreviousPage}"/>
+                    <Button Text="Next" IsEnabled="{Binding HasNext}" Command="{Binding GetNextPage}"/>
+                </StackLayout>
+                <Label Text="{Binding TitleText}"/>
+                <CollectionView ItemsSource="{Binding Characters}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding name}" FontSize="Large" TextColor="Aqua"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

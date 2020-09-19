@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RickAndMortyCharacterWiki.Services;
+using RickAndMortyCharacterWiki.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +11,8 @@ namespace RickAndMortyCharacterWiki
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            DependencyService.Register<ICharacterService, CharacterService>();
+            MainPage = new NavigationPage(new Index());
         }
 
         protected override void OnStart()

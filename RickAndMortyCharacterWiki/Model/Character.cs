@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace RickAndMortyCharacterWiki.Model
@@ -20,9 +21,16 @@ namespace RickAndMortyCharacterWiki.Model
         public DateTime created { get; set; }
     }
 
-    public class Location
+    public class CharactersResponse
     {
-        public string name { get; set; }
-        public string url { get; set; }
+        public ResponseInfo info { get; set; }
+        public ObservableCollection<Character> results { get; set; }
+    }
+    public class ResponseInfo
+    {
+        public int count { get; set; }
+        public int pages { get; set; }
+        public string next { get; set; }
+        public string prev { get; set; }
     }
 }

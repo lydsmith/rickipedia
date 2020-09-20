@@ -18,6 +18,7 @@ namespace RickAndMortyCharacterWiki.View
         {
             InitializeComponent();
 
+            //NavigationPage.SetHasNavigationBar(this, false);
             DetailsViewModel vm = new DetailsViewModel { };
             this.BindingContext = vm;
             vm.Character = character;

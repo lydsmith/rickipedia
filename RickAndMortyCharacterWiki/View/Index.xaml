@@ -7,12 +7,18 @@
         <viewmodel:IndexViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="{StaticResource backgroundColorPrimary}">
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Spacing="-6">
+                <Frame BorderColor="{StaticResource backgroundColorSecondary}" Padding="0,0,0,1">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource textAndOutlineColor}" Padding="15">
+                        <Label Text="Rick and Morty" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title" TextColor="{StaticResource accentColorPrimary}"/>
+                        <Label Text="Character Index" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource accentColorPrimary}"/>
+                    </StackLayout>
+                </Frame>
                 <StackLayout 
                     Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="5">
-                    <Label Text="Filter by:" FontAttributes="Bold" FontSize="12" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                    <Picker Title="Gender" ItemsSource="{Binding Genders}" HorizontalOptions="FillAndExpand" FontSize="12" SelectedItem="{Binding SelectedGender}"/>
+                    <Label Text="Filter by:" FontAttributes="Bold" FontSize="12" HorizontalOptions="FillAndExpand" VerticalOptions="Center"   />
+                    <Picker Title="Gender" ItemsSource="{Binding Genders}" HorizontalOptions="FillAndExpand" FontSize="12"   SelectedItem="{Binding SelectedGender}"/>
 
                 </StackLayout>
                 <StackLayout 
@@ -29,10 +35,9 @@
                         <DataTemplate>
                             <ContentView>
                                 <Frame CornerRadius="10" Margin="5" Padding="10"
-                               OutlineColor="Brown" BackgroundColor="PaleTurquoise">
+                               OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource backgroundColorSecondary}">
                                     <StackLayout
                                     Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
-                                        <!--<Image Source="{Binding image}" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Fill"></Image>-->
                                         <Frame CornerRadius="60" Margin="0" Padding="0" IsClippedToBounds="True" WidthRequest="70" HeightRequest="70">
                                             <Image Aspect="AspectFill" Source="{Binding image}" HorizontalOptions="Fill" />
                                         </Frame>
@@ -40,30 +45,30 @@
                                         Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
                                             <StackLayout
                                             Orientation="Horizontal" HorizontalOptions="Fill" Margin="0" Padding="0">
-                                                <Label Text="Name:" FontSize="9" TextColor="Brown"
+                                                <Label Text="Name:" FontSize="9"  
                                                 HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                                                <Label Text="{Binding name}" FontSize="9" TextColor="Brown"
+                                                <Label Text="{Binding name}" FontSize="9"  
                                                 HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
                                             </StackLayout>
                                             <StackLayout
                                             Orientation="Horizontal" HorizontalOptions="Fill">
-                                                <Label Text="Status:" FontSize="9" TextColor="Brown"
+                                                <Label Text="Status:" FontSize="9"  
                                                 HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                                                <Label Text="{Binding status}" FontSize="9" TextColor="Brown"
+                                                <Label Text="{Binding status}" FontSize="9"  
                                                 HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
                                             </StackLayout>
                                             <StackLayout
                                             Orientation="Horizontal" HorizontalOptions="Fill">
-                                                <Label Text="Species:" FontSize="9" TextColor="Brown"
+                                                <Label Text="Species:" FontSize="9"  
                                                 HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                                                <Label Text="{Binding species}" FontSize="9" TextColor="Brown"
+                                                <Label Text="{Binding species}" FontSize="9"  
                                                 HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
                                             </StackLayout>
                                             <StackLayout
                                             Orientation="Horizontal" HorizontalOptions="Fill">
-                                                <Label Text="Gender:" FontSize="9" TextColor="Brown"
+                                                <Label Text="Gender:" FontSize="9"  
                                                 HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                                                <Label Text="{Binding gender}" FontSize="9" TextColor="Brown"
+                                                <Label Text="{Binding gender}" FontSize="9"  
                                                 HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
                                             </StackLayout>
                                         </StackLayout>

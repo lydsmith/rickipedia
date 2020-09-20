@@ -4,6 +4,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+[assembly: ExportFont("get_schwifty.ttf", Alias = "GetSchwifty")]
 namespace RickAndMortyCharacterWiki
 {
     public partial class App : Application

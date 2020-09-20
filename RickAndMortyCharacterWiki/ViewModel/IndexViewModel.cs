@@ -83,6 +83,17 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Genders"));
             }
         }
+        private ObservableCollection<string> status;
+        public ObservableCollection<string> Status
+        {
+            get { return status; }
+            set
+            {
+                status = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Status"));
+            
+            }
+        }
         private string selectedGender;
         public string SelectedGender
         {
@@ -92,6 +103,18 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 selectedGender = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedGender"));
                 //call api to filter by gender
+                GetCharacters(true);
+            }
+        }
+        private string selectedStatus;
+        public string SelectedStatus
+        {
+            get { return selectedStatus; }
+            set
+            {
+                selectedStatus = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedStatus"));
+                //call api to filter by status
                 GetCharacters(true);
             }
         }
@@ -137,8 +160,10 @@ namespace RickAndMortyCharacterWiki.ViewModel
         {
             try
             {
-                //setup gender filter values
-                Genders = await service.GetAllGenders();
+                //setup filter values
+                var filterValues = await service.GetFilterValues();
+                Genders = filterValues["genders"];
+                Status = filterValues["status"];
             }
             catch(Exception e)
             {
@@ -150,7 +175,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 //goto page 1 if filtering or if first call
                 if (filterUpdated || PageNumber==0) { PageNumber = 1; }
-                var response = await service.GetCharacters(PageNumber, SelectedGender);
+                var response = await service.GetCharacters(PageNumber, SelectedGender, SelectedStatus);
                 TotalPages = response.info.pages;
                 HasNext = !string.IsNullOrEmpty(response.info.next);
                 HasPrevious = !string.IsNullOrEmpty(response.info.prev);

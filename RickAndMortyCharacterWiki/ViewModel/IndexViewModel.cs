@@ -1,5 +1,6 @@
 ﻿using RickAndMortyCharacterWiki.Model;
 using RickAndMortyCharacterWiki.Services;
+using RickAndMortyCharacterWiki.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,6 +93,23 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 GetCharacters();
             }
         }
+        private Character selectedCharacter;
+        public Character SelectedCharacter
+        {
+            get  { return selectedCharacter; }
+            set
+            {
+                selectedCharacter = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedCharacter"));
+                
+                if (selectedCharacter == null)
+                    return;
+
+                //Show Details page for selected character
+                App.Current.MainPage.Navigation.PushAsync(new Details(SelectedCharacter));
+                SelectedCharacter = null;
+            }
+        }
 
         public Command GetPreviousPage { private set; get; }
         public Command GetNextPage { private set; get; }
@@ -111,6 +129,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 GetCharacters();
             }
         }
+
         public async void SetUpFilters()
         {
             try

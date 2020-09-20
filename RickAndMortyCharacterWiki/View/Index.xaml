@@ -7,11 +7,6 @@
         <viewmodel:IndexViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <!--<StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>-->
         <ScrollView>
             <StackLayout Orientation="Vertical">
                 <StackLayout 
@@ -27,7 +22,7 @@
                     <Button Text="Next" FontSize="14" IsEnabled="{Binding HasNext}" Command="{Binding GetNextPage}"/>
                 </StackLayout>
                 <Label Text="{Binding TitleText}"/>
-                <CollectionView ItemsSource="{Binding Characters}">
+                <CollectionView ItemsSource="{Binding Characters}" SelectionMode="Single" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout

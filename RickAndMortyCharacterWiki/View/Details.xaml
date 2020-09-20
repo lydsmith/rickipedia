@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="RickAndMortyCharacterWiki.View.Details">
+    <ContentPage.Content>
+        <ScrollView>
+            <Frame CornerRadius="10"  Margin="15"
+                OutlineColor="Brown" BackgroundColor="PaleTurquoise">
+
+                <StackLayout Orientation="Vertical">
+                    <Frame CornerRadius="10" Margin="0" Padding="0" IsClippedToBounds="True">
+                        <Image Aspect="AspectFill" Source="{Binding Character.image}" HorizontalOptions="Fill" />
+                    </Frame>
+                    <StackLayout
+                    Orientation="Horizontal">
+                        <Label Text="Name:" FontSize="12" TextColor="Brown"
+                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.name}" FontSize="12" TextColor="Brown"
+                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

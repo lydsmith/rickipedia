@@ -17,8 +17,9 @@
                 <StackLayout 
                     HeightRequest="40"
                     Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Picker Title="Gender" ItemsSource="{Binding Genders}" FontSize="14"/>
+                    <Picker Title="Gender" ItemsSource="{Binding Genders}" FontSize="14" SelectedItem="{Binding SelectedGender}"/>
                 </StackLayout>
+                <Label Text="{Binding PageNumber}"/>
                 <StackLayout 
                     HeightRequest="50"
                     Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
@@ -29,8 +30,12 @@
                 <CollectionView ItemsSource="{Binding Characters}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
+                            <StackLayout
+                                HeightRequest="50"
+                                Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                <Image Source="{Binding image}" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Center"></Image>
                                 <Label Text="{Binding name}" FontSize="Large" TextColor="Aqua"/>
+                                <Label Text="{Binding gender}" FontSize="Large" TextColor="Red"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

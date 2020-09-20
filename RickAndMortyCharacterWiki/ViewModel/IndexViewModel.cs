@@ -16,13 +16,13 @@ namespace RickAndMortyCharacterWiki.ViewModel
         ICharacterService service = DependencyService.Get<ICharacterService>();
         public IndexViewModel()
         {
+            SetUpFilters();
             GetCharacters();
             GetPreviousPage = new Command(previousPage);
             GetNextPage = new Command(nextPage);
         }
 
         private ObservableCollection<Character> characters;
-
         public ObservableCollection<Character> Characters
         {
             get { return characters; }
@@ -88,6 +88,8 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 selectedGender = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedGender"));
+                //call api to filter by gender
+                GetCharacters();
             }
         }
 
@@ -109,18 +111,27 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 GetCharacters();
             }
         }
-
+        public async void SetUpFilters()
+        {
+            try
+            {
+                //setup gender filter values
+                Genders = await service.GetAllGenders();
+            }
+            catch(Exception e)
+            {
+                //log error
+            }
+        }
         public async void GetCharacters() {
             try
             {
-                var response = await service.GetCharacters(PageNumber);
+                if (PageNumber == 0) { PageNumber = 1; }
+                var response = await service.GetCharacters(PageNumber, SelectedGender);
                 TotalPages = response.info.pages;
                 HasNext = !string.IsNullOrEmpty(response.info.next);
                 HasPrevious = !string.IsNullOrEmpty(response.info.prev);
                 Characters = response.results;
-
-                //setup gender filter values
-                Genders = await service.GetAllGenders();
             }
             catch (Exception e) { 
                 //log errors

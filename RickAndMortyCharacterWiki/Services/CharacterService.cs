@@ -16,7 +16,7 @@ namespace RickAndMortyCharacterWiki.Services
 
         public async Task<ObservableCollection<string>> GetAllGenders()
         {
-            var genders = new List<string>();
+            var genders = new List<string> { "All Genders" };
             HttpClient client = new HttpClient();
             var nextUrl = "";
             var page = 1;
@@ -42,7 +42,7 @@ namespace RickAndMortyCharacterWiki.Services
                         }
                         else
                         {
-                        // End loop if we get an error response.
+                            // End loop
                             nextUrl = null;
                         }
                     });
@@ -51,9 +51,10 @@ namespace RickAndMortyCharacterWiki.Services
             return new ObservableCollection<string>(genders.OrderBy(x=>x).ToList());
         }
 
-        public async Task<CharactersResponse> GetCharacters(int page=0)
+        public async Task<CharactersResponse> GetCharacters(int page=0, string gender="")
         {
-            string url = $"{_baseUrl}character/?page={page}";
+            if (gender == "All Genders") { gender = ""; }
+            string url = $"{_baseUrl}character/?page={page}&gender={gender}";
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)

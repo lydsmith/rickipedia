@@ -9,7 +9,7 @@ namespace RickAndMortyCharacterWiki.Services
 {
     public interface ICharacterService
     {
-        Task<CharactersResponse> GetCharacters(int page=0);
+        Task<CharactersResponse> GetCharacters(int page=0, string gender="");
         Task<ObservableCollection<string>> GetAllGenders();
     }
 }

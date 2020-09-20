@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -69,7 +70,26 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HasNext"));
             }
         }
-
+        private ObservableCollection<string> genders;
+        public ObservableCollection<string> Genders
+        {
+            get { return genders; }
+            set
+            {
+                genders = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Genders"));
+            }
+        }
+        private string selectedGender;
+        public string SelectedGender
+        {
+            get { return selectedGender; }
+            set
+            {
+                selectedGender = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedGender"));
+            }
+        }
 
         public Command GetPreviousPage { private set; get; }
         public Command GetNextPage { private set; get; }
@@ -98,6 +118,9 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 HasNext = !string.IsNullOrEmpty(response.info.next);
                 HasPrevious = !string.IsNullOrEmpty(response.info.prev);
                 Characters = response.results;
+
+                //setup gender filter values
+                Genders = await service.GetAllGenders();
             }
             catch (Exception e) { 
                 //log errors

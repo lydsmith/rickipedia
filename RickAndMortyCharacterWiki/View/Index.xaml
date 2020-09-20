@@ -15,10 +15,15 @@
         <ScrollView>
             <StackLayout Orientation="Vertical">
                 <StackLayout 
-                    HeightRequest="30"
+                    HeightRequest="40"
                     Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Previous" IsEnabled="{Binding HasPrevious}" Command="{Binding GetPreviousPage}"/>
-                    <Button Text="Next" IsEnabled="{Binding HasNext}" Command="{Binding GetNextPage}"/>
+                    <Picker Title="Gender" ItemsSource="{Binding Genders}" FontSize="14"/>
+                </StackLayout>
+                <StackLayout 
+                    HeightRequest="50"
+                    Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Previous" FontSize="14" IsEnabled="{Binding HasPrevious}" Command="{Binding GetPreviousPage}"/>
+                    <Button Text="Next" FontSize="14" IsEnabled="{Binding HasNext}" Command="{Binding GetNextPage}"/>
                 </StackLayout>
                 <Label Text="{Binding TitleText}"/>
                 <CollectionView ItemsSource="{Binding Characters}">

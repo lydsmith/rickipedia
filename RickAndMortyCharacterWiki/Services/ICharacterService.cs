@@ -10,5 +10,6 @@ namespace RickAndMortyCharacterWiki.Services
     public interface ICharacterService
     {
         Task<CharactersResponse> GetCharacters(int page=0);
+        Task<ObservableCollection<string>> GetAllGenders();
     }
 }

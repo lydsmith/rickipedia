@@ -12,12 +12,61 @@
                         <Image Aspect="AspectFill" Source="{Binding Character.image}" HorizontalOptions="Fill" />
                     </Frame>
                     <StackLayout
-                    Orientation="Horizontal">
+                        Orientation="Horizontal">
                         <Label Text="Name:" FontSize="11"
-                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
                         <Label Text="{Binding Character.name}" FontSize="11"
-                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
                     </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label Text="Status:" FontSize="11"
+                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.status}" FontSize="11"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label Text="Species:" FontSize="11"
+                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.species}" FontSize="11"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal" IsVisible="{Binding DisplayType}">
+                        <Label Text="Type:" FontSize="11"
+                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.type}" FontSize="11"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label Text="Gender:" FontSize="11"
+                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.gender}" FontSize="11"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label Text="Origin:" LineBreakMode="WordWrap" FontSize="11"
+                             HorizontalOptions="StartAndExpand" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.origin.name}"  LineBreakMode="WordWrap" FontSize="10"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label Text="Location:" LineBreakMode="WordWrap" FontSize="11"
+                             HorizontalOptions="StartAndExpand" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.location.name}"  LineBreakMode="WordWrap" FontSize="10"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>
+                    <!--<StackLayout
+                        Orientation="Horizontal">
+                        <Label Text="Episode:" FontSize="11"
+                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.location}" FontSize="11"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                    </StackLayout>-->
                 </StackLayout>
             </Frame>
         </ScrollView>

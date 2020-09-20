@@ -21,6 +21,17 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 character = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Character"));
+                DisplayType = !string.IsNullOrEmpty(Character.type);
+            }
+        }
+
+        private bool dislayType;
+        public bool DisplayType {
+            get { return dislayType; }
+            set
+            {
+                dislayType = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayType"));
             }
         }
 

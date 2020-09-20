@@ -39,6 +39,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 pageNumber = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PageNumber"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PagesLabel"));
             }
         }
         private int totalPages;
@@ -49,6 +50,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 totalPages = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalPages"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PagesLabel"));
             }
         }
         private bool hasPrevious;
@@ -110,6 +112,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 SelectedCharacter = null;
             }
         }
+        public string PagesLabel => $"Page {PageNumber} of {TotalPages}";
 
         public Command GetPreviousPage { private set; get; }
         public Command GetNextPage { private set; get; }

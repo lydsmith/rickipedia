@@ -15,6 +15,7 @@ namespace RickAndMortyCharacterWiki.View
         public Index()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

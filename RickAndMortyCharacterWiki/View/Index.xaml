@@ -8,30 +8,68 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Spacing="-6">
                 <StackLayout 
-                    HeightRequest="40"
-                    Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Picker Title="Gender" ItemsSource="{Binding Genders}" FontSize="14" SelectedItem="{Binding SelectedGender}"/>
+                    Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="5">
+                    <Label Text="Filter by:" FontAttributes="Bold" FontSize="12" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                    <Picker Title="Gender" ItemsSource="{Binding Genders}" HorizontalOptions="FillAndExpand" FontSize="12" SelectedItem="{Binding SelectedGender}"/>
+
                 </StackLayout>
-                <Label Text="{Binding PageNumber}"/>
                 <StackLayout 
-                    HeightRequest="50"
-                    Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Previous" FontSize="14" IsEnabled="{Binding HasPrevious}" Command="{Binding GetPreviousPage}"/>
-                    <Button Text="Next" FontSize="14" IsEnabled="{Binding HasNext}" Command="{Binding GetNextPage}"/>
+                    Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Center" Margin="15">
+                    <Label Text="{Binding PagesLabel}"/>
+                    <StackLayout 
+                        Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <ImageButton Source="leftarrow.png" IsVisible="{Binding HasPrevious}" BackgroundColor="Transparent" HorizontalOptions="Start" WidthRequest="20" Command="{Binding GetPreviousPage}"/>
+                        <ImageButton Source="rightarrow.png" IsVisible="{Binding HasNext}" BackgroundColor="Transparent"  HorizontalOptions="End" WidthRequest="20" Command="{Binding GetNextPage}"/>
+                    </StackLayout>
                 </StackLayout>
-                <Label Text="{Binding TitleText}"/>
-                <CollectionView ItemsSource="{Binding Characters}" SelectionMode="Single" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}">
+                <CollectionView ItemsSource="{Binding Characters}" SelectionMode="Single" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}" Margin="5" VerticalOptions="Fill">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout
-                                HeightRequest="50"
-                                Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                                <Image Source="{Binding image}" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Center"></Image>
-                                <Label Text="{Binding name}" FontSize="Large" TextColor="Aqua"/>
-                                <Label Text="{Binding gender}" FontSize="Large" TextColor="Red"/>
-                            </StackLayout>
+                            <ContentView>
+                                <Frame CornerRadius="10" Margin="5" Padding="10"
+                               OutlineColor="Brown" BackgroundColor="PaleTurquoise">
+                                    <StackLayout
+                                    Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
+                                        <!--<Image Source="{Binding image}" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Fill"></Image>-->
+                                        <Frame CornerRadius="60" Margin="0" Padding="0" IsClippedToBounds="True" WidthRequest="70" HeightRequest="70">
+                                            <Image Aspect="AspectFill" Source="{Binding image}" HorizontalOptions="Fill" />
+                                        </Frame>
+                                        <StackLayout
+                                        Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                                            <StackLayout
+                                            Orientation="Horizontal" HorizontalOptions="Fill" Margin="0" Padding="0">
+                                                <Label Text="Name:" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                                                <Label Text="{Binding name}" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                                            </StackLayout>
+                                            <StackLayout
+                                            Orientation="Horizontal" HorizontalOptions="Fill">
+                                                <Label Text="Status:" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                                                <Label Text="{Binding status}" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                                            </StackLayout>
+                                            <StackLayout
+                                            Orientation="Horizontal" HorizontalOptions="Fill">
+                                                <Label Text="Species:" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                                                <Label Text="{Binding species}" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                                            </StackLayout>
+                                            <StackLayout
+                                            Orientation="Horizontal" HorizontalOptions="Fill">
+                                                <Label Text="Gender:" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
+                                                <Label Text="{Binding gender}" FontSize="9" TextColor="Brown"
+                                                HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ContentView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

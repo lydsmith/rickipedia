@@ -90,7 +90,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 selectedGender = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedGender"));
                 //call api to filter by gender
-                GetCharacters();
+                GetCharacters(true);
             }
         }
         private Character selectedCharacter;
@@ -142,10 +142,11 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 //log error
             }
         }
-        public async void GetCharacters() {
+        public async void GetCharacters(bool filterUpdated=false) {
             try
             {
-                if (PageNumber == 0) { PageNumber = 1; }
+                //goto page 1 if filtering or if first call
+                if (filterUpdated || PageNumber==0) { PageNumber = 1; }
                 var response = await service.GetCharacters(PageNumber, SelectedGender);
                 TotalPages = response.info.pages;
                 HasNext = !string.IsNullOrEmpty(response.info.next);

@@ -16,7 +16,7 @@
                     </StackLayout>
                 </Frame>
                 <StackLayout 
-                    Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="5">
+                    Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10">
                     <Label Text="Filter by:" FontAttributes="Bold" FontSize="12" HorizontalOptions="FillAndExpand" VerticalOptions="Center"   />
                     <Picker Title="Gender" ItemsSource="{Binding Genders}" HorizontalOptions="FillAndExpand" FontSize="12"   SelectedItem="{Binding SelectedGender}"/>
                     <Picker Title="Status" ItemsSource="{Binding Status}" HorizontalOptions="FillAndExpand" FontSize="12"   SelectedItem="{Binding SelectedStatus}"/>

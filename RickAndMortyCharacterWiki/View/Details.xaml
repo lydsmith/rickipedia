@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="RickAndMortyCharacterWiki.View.Details">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="{Binding Character.name}" HorizontalTextAlignment="End" FontSize="20" Margin="0, 0, 15, 0" />
+        </StackLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
-        <ScrollView BackgroundColor="{StaticResource backgroundColorPrimary}">
+        <ScrollView BackgroundColor="{StaticResource backgroundColorPrimary}" Padding="0,0,0,15">
             <Frame CornerRadius="10"  Margin="15"
                 OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource accentColorPrimary}">
-
                 <StackLayout Orientation="Vertical">
                     <Frame CornerRadius="10" Margin="5" Padding="0" IsClippedToBounds="True">
                         <Image Aspect="AspectFill" Source="{Binding Character.image}" HorizontalOptions="Fill" />

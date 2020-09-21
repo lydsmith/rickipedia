@@ -11,5 +11,6 @@ namespace RickAndMortyCharacterWiki.Services
     {
         Task<CharactersResponse> GetCharacters(int page=0, string gender="", string status = "");
         Task<Dictionary<string, ObservableCollection<string>>> GetFilterValues();
+        Task<ObservableCollection<Episode>> GetMultipleEpisodes(string ids);
     }
 }

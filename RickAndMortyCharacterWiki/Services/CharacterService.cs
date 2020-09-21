@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RickAndMortyCharacterWiki.Model;
 using System;
 using System.Collections.Generic;
@@ -22,15 +23,23 @@ namespace RickAndMortyCharacterWiki.Services
             if (status == AllStatusText) { status = ""; }
             string url = $"{_baseUrl}character/?page={page}&gender={gender}&status={status}";
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+
+            try
             {
-                var result = await response.Content.ReadAsStringAsync();
-                var jsonResult = JsonConvert.DeserializeObject<CharactersResponse>(result);
-                if (jsonResult != null)
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return jsonResult;
+                    var result = await response.Content.ReadAsStringAsync();
+                    var jsonResult = JsonConvert.DeserializeObject<CharactersResponse>(result);
+                    if (jsonResult != null)
+                    {
+                        return jsonResult;
+                    }
                 }
+            }
+            catch(Exception e)
+            {
+                //add logger
             }
             return null;
         }
@@ -45,7 +54,9 @@ namespace RickAndMortyCharacterWiki.Services
             do
             {
                 string url = $"{_baseUrl}character/?page={page}";
-                await client.GetAsync(url)
+                try
+                {
+                    await client.GetAsync(url)
                     .ContinueWith(async (filterResponse) =>
                     {
                         var response = await filterResponse;
@@ -70,13 +81,50 @@ namespace RickAndMortyCharacterWiki.Services
                             nextUrl = null;
                         }
                     });
+                }
+                catch(Exception e)
+                {
+                    //add logger
+                }
 
-            } while (nextUrl!=null);
+            } while (nextUrl != null);
 
             var filterValues = new Dictionary<string, ObservableCollection<string>>();
             filterValues.Add("genders", new ObservableCollection<string>(genders.OrderBy(x => x).ToList()));
             filterValues.Add("status", new ObservableCollection<string>(status.OrderBy(x => x).ToList()));
             return filterValues;
+        }
+
+        public async Task<ObservableCollection<Episode>> GetMultipleEpisodes(string ids)
+        {
+            if (ids != null && ids.Any())
+            {
+                try
+                {
+                    string url = $"{_baseUrl}episode/{ids}";
+                    HttpClient client = new HttpClient();
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        var token = JToken.Parse(result);
+
+                        if (token is JArray)
+                        {
+                            return JsonConvert.DeserializeObject<ObservableCollection<Episode>>(result);
+                        }
+                        else if (token is JObject)
+                        {
+                          return new ObservableCollection<Episode>(new List<Episode> { JsonConvert.DeserializeObject<Episode>(result) });
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    //add logger
+                }
+            }
+            return null;
         }
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="#97ce4c"/>
+  </item>
+  <item>
+    <bitmap
+        android:src="@drawable/green_portal"/>
+        <!--android:gravity="fill_horizontal"/>-->
+  </item>
+</layer-list>

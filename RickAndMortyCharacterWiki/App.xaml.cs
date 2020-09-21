@@ -1,4 +1,5 @@
 ﻿using RickAndMortyCharacterWiki.Services;
+using RickAndMortyCharacterWiki.Services.Interfaces;
 using RickAndMortyCharacterWiki.View;
 using System;
 using Xamarin.Forms;

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RickAndMortyCharacterWiki.Model;
+using RickAndMortyCharacterWiki.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,7 @@ namespace RickAndMortyCharacterWiki.Services
         readonly string _baseUrl = "https://rickandmortyapi.com/api/";
         const string AllGendersText = "All genders";
         const string AllStatusText = "All status";
+        private readonly NLog.ILogger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public async Task<CharactersResponse> GetCharacters(int page = 0, string gender = "", string status = "")
         {
@@ -39,7 +41,7 @@ namespace RickAndMortyCharacterWiki.Services
             }
             catch(Exception e)
             {
-                //add logger
+                Logger.Error(e, e.Message);
             }
             return null;
         }
@@ -84,7 +86,7 @@ namespace RickAndMortyCharacterWiki.Services
                 }
                 catch(Exception e)
                 {
-                    //add logger
+                    Logger.Error(e, e.Message);
                 }
 
             } while (nextUrl != null);
@@ -121,7 +123,7 @@ namespace RickAndMortyCharacterWiki.Services
                 }
                 catch (Exception e)
                 {
-                    //add logger
+                    Logger.Error(e, e.Message);
                 }
             }
             return null;

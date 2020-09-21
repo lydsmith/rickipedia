@@ -1,5 +1,5 @@
 ﻿using RickAndMortyCharacterWiki.Model;
-using RickAndMortyCharacterWiki.Services;
+using RickAndMortyCharacterWiki.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

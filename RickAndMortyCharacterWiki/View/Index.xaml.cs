@@ -12,9 +12,11 @@ namespace RickAndMortyCharacterWiki.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Index : ContentPage
     {
+        private readonly NLog.ILogger Logger = NLog.LogManager.GetCurrentClassLogger();
         public Index()
         {
             InitializeComponent();
+            Logger.Info("Application Start - NLog Initialised");
             NavigationPage.SetHasNavigationBar(this, false);
         }
     }

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RickAndMortyCharacterWiki.Services
+namespace RickAndMortyCharacterWiki.Services.Interfaces
 {
     public interface ICharacterService
     {

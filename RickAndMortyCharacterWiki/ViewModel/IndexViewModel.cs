@@ -1,5 +1,5 @@
 ﻿using RickAndMortyCharacterWiki.Model;
-using RickAndMortyCharacterWiki.Services;
+using RickAndMortyCharacterWiki.Services.Interfaces;
 using RickAndMortyCharacterWiki.View;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         ICharacterService service = DependencyService.Get<ICharacterService>();
+        private readonly NLog.ILogger Logger = NLog.LogManager.GetCurrentClassLogger();
         public IndexViewModel()
         {
             SetUpFilters();
@@ -27,7 +28,9 @@ namespace RickAndMortyCharacterWiki.ViewModel
         public ObservableCollection<Character> Characters
         {
             get { return characters; }
-            set { characters = value;
+            set
+            {
+                characters = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Characters"));
             }
         }
@@ -91,7 +94,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 status = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Status"));
-            
+
             }
         }
         private string selectedGender;
@@ -121,12 +124,12 @@ namespace RickAndMortyCharacterWiki.ViewModel
         private Character selectedCharacter;
         public Character SelectedCharacter
         {
-            get  { return selectedCharacter; }
+            get { return selectedCharacter; }
             set
             {
                 selectedCharacter = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedCharacter"));
-                
+
                 if (selectedCharacter == null)
                     return;
 
@@ -165,24 +168,26 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 Genders = filterValues["genders"];
                 Status = filterValues["status"];
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                //log error
+                Logger.Error(e, e.Message);
             }
         }
-        public async void GetCharacters(bool filterUpdated=false) {
+        public async void GetCharacters(bool filterUpdated = false)
+        {
             try
             {
                 //goto page 1 if filtering or if first call
-                if (filterUpdated || PageNumber==0) { PageNumber = 1; }
+                if (filterUpdated || PageNumber == 0) { PageNumber = 1; }
                 var response = await service.GetCharacters(PageNumber, SelectedGender, SelectedStatus);
                 TotalPages = response.info.pages;
                 HasNext = !string.IsNullOrEmpty(response.info.next);
                 HasPrevious = !string.IsNullOrEmpty(response.info.prev);
                 Characters = response.results;
             }
-            catch (Exception e) { 
-                //log errors
+            catch (Exception e)
+            {
+                Logger.Error(e, e.Message);
             }
         }
     }

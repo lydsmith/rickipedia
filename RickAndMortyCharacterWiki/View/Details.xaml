@@ -4,71 +4,71 @@
              x:Class="RickAndMortyCharacterWiki.View.Details">
     <NavigationPage.TitleView>
         <StackLayout>
-            <Label Text="{Binding Character.name}" HorizontalTextAlignment="End" FontSize="20" Margin="0, 0, 15, 0" />
+            <Label Text="{Binding Character.name}" HorizontalTextAlignment="End" FontSize="Medium" Margin="0, 0, 15, 0" />
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <ScrollView BackgroundColor="{StaticResource backgroundColorPrimary}" Padding="0,0,0,15">
-            <Frame CornerRadius="10"  Margin="15"
-                OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource accentColorPrimary}">
-                <StackLayout Orientation="Vertical">
+            <Frame CornerRadius="10"  Margin="15,15,15,0"
+                OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource accentColorPrimary}" VerticalOptions="Fill">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                     <Frame CornerRadius="10" Margin="5" Padding="0" IsClippedToBounds="True">
-                        <Image Aspect="AspectFill" Source="{Binding Character.image}" HorizontalOptions="Fill" />
+                        <Image Aspect="AspectFill" Source="{Binding Character.image}" HorizontalOptions="Fill" HeightRequest="150" />
                     </Frame>
                     <StackLayout
-                        Orientation="Horizontal">
-                        <Label Text="Name:" FontSize="10"
-                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.name}"  LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                        Orientation="Horizontal" Margin="5">
+                        <Label Text="Name:" FontSize="Small"
+                             HorizontalOptions="StartAndExpand" MinimumWidthRequest="80"  VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.name}"  LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"  />
                     </StackLayout>
                     <StackLayout
-                        Orientation="Horizontal">
-                        <Label Text="Status:" FontSize="10"
+                        Orientation="Horizontal" Margin="5">
+                        <Label Text="Status:" FontSize="Small"
                              HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.status}" LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                        <Label Text="{Binding Character.status}" LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"  />
                     </StackLayout>
                     <StackLayout
-                        Orientation="Horizontal">
-                        <Label Text="Species:" FontSize="10"
-                             HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.species}"  LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                        Orientation="Horizontal" Margin="5">
+                        <Label Text="Species:" FontSize="Small"
+                             HorizontalOptions="StartAndExpand" MinimumWidthRequest="80"  VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.species}"  LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End" />
                     </StackLayout>
                     <StackLayout
-                        Orientation="Horizontal" IsVisible="{Binding DisplayType}">
-                        <Label Text="Type:" FontSize="10"
+                        Orientation="Horizontal" Margin="5" IsVisible="{Binding DisplayType}">
+                        <Label Text="Type:" FontSize="Small"
                              HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.type}"  LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"   />
+                        <Label Text="{Binding Character.type}"  LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"   />
                     </StackLayout>
                     <StackLayout
-                        Orientation="Horizontal">
-                        <Label Text="Gender:" FontSize="10"
+                        Orientation="Horizontal" Margin="5">
+                        <Label Text="Gender:" FontSize="Small"
                              HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.gender}"  LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.gender}"  LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"  />
                     </StackLayout>
                     <StackLayout
-                        Orientation="Horizontal">
-                        <Label Text="Origin:" LineBreakMode="WordWrap" FontSize="10"
+                        Orientation="Horizontal" Margin="5">
+                        <Label Text="Origin:" LineBreakMode="WordWrap" FontSize="Small"
                              HorizontalOptions="StartAndExpand" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.origin.name}"  LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.origin.name}"  LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"   />
                     </StackLayout>
                     <StackLayout
-                        Orientation="Horizontal">
-                        <Label Text="Location:" LineBreakMode="WordWrap" FontSize="10"
+                        Orientation="Horizontal" Margin="5">
+                        <Label Text="Location:" LineBreakMode="WordWrap" FontSize="Small"
                              HorizontalOptions="StartAndExpand" MinimumWidthRequest="100" VerticalOptions="CenterAndExpand"  />
-                        <Label Text="{Binding Character.location.name}"  LineBreakMode="WordWrap" FontSize="10"
-                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"  />
+                        <Label Text="{Binding Character.location.name}"  LineBreakMode="WordWrap" FontSize="Small"
+                             HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="End"  />
                     </StackLayout>
                     <StackLayout
                         Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,10,0,0">
-                        <Label Text="Episodes" FontSize="15"
+                        <Label Text="Episodes" FontSize="Medium"
                              HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-                        <Label Text="{Binding EpisodesString}"  FontSize="10" HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding EpisodesString}"  FontSize="Small" HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"/>
                         
                     </StackLayout>
                 </StackLayout>

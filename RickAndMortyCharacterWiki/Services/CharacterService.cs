@@ -48,8 +48,8 @@ namespace RickAndMortyCharacterWiki.Services
 
         public async Task<Dictionary<string, ObservableCollection<string>>> GetFilterValues()
         {
-            var genders = new List<string> { AllGendersText };
-            var status = new List<string> { AllStatusText };
+            var genders = new List<string>();
+            var status = new List<string>();
             HttpClient client = new HttpClient();
             var nextUrl = "";
             var page = 1;
@@ -92,8 +92,22 @@ namespace RickAndMortyCharacterWiki.Services
             } while (nextUrl != null);
 
             var filterValues = new Dictionary<string, ObservableCollection<string>>();
-            filterValues.Add("genders", new ObservableCollection<string>(genders.OrderBy(x => x).ToList()));
-            filterValues.Add("status", new ObservableCollection<string>(status.OrderBy(x => x).ToList()));
+
+            //ensure 'All' option is always first and the rest of the options ordered alphabetically after
+            if (genders != null)
+            {
+                genders = genders.OrderByDescending(x => x).ToList();
+                genders.Add(AllGendersText);
+                genders.Reverse();
+                filterValues.Add("genders", new ObservableCollection<string>(genders));
+            }
+            if (status != null)
+            {
+                status = status.OrderByDescending(x => x).ToList();
+                status.Add(AllStatusText);
+                status.Reverse();
+                filterValues.Add("status", new ObservableCollection<string>(status));
+            }
             return filterValues;
         }
 

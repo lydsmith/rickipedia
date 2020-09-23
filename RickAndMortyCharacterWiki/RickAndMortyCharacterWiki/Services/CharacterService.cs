@@ -19,11 +19,11 @@ namespace RickAndMortyCharacterWiki.Services
         const string AllStatusText = "All status";
         private readonly NLog.ILogger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public async Task<CharactersResponse> GetCharacters(int page = 0, string gender = "", string status = "")
+        public async Task<CharactersResponse> GetCharacters(int page = 0, string gender = "", string status = "", string name = "")
         {
             if (gender == AllGendersText) { gender = ""; }
             if (status == AllStatusText) { status = ""; }
-            string url = $"{_baseUrl}character/?page={page}&gender={gender}&status={status}";
+            string url = $"{_baseUrl}character/?page={page}&name={name}&status={status}&gender={gender}";
             HttpClient client = new HttpClient();
 
             try

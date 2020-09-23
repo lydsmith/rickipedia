@@ -4,7 +4,7 @@
              x:Class="RickAndMortyCharacterWiki.View.Details">
     <NavigationPage.TitleView>
         <StackLayout>
-            <Label Text="{Binding Character.name}" HorizontalTextAlignment="End" FontSize="Medium" Margin="0, 0, 15, 0" />
+            <Label Text="{Binding Character.name}" HorizontalTextAlignment="End" FontSize="Medium" Margin="0, 0, 15, 0" TextColor="{StaticResource accentColorPrimary}" />
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>

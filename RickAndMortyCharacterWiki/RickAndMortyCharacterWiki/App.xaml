@@ -7,24 +7,24 @@
         <ResourceDictionary>
             <Color x:Key="backgroundColorPrimary">#f0e14a</Color>
             <Color x:Key="backgroundColorSecondary">#e4a788</Color>
-            <Color x:Key="textAndOutlineColor">#44281d</Color>
+            <Color x:Key="textAndOutlineColor">#000</Color>
             <Color x:Key="accentColorPrimary">#97ce4c</Color>
             <Color x:Key="accentColorSecondary">#e89ac7</Color>
 
             <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="GetSchwifty" />
+                <Setter Property="FontFamily" Value="Calligraphr" />
                 <Setter Property="TextColor" Value="{StaticResource textAndOutlineColor}" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="FontFamily" Value="GetSchwifty" />
+                <Setter Property="FontFamily" Value="Calligraphr" />
                 <Setter Property="TextColor" Value="{StaticResource textAndOutlineColor}" />
             </Style>
             <Style TargetType="Entry">
-                <Setter Property="FontFamily" Value="GetSchwifty" />
+                <Setter Property="FontFamily" Value="Calligraphr" />
                 <Setter Property="TextColor" Value="{StaticResource textAndOutlineColor}" />
             </Style>
             <Style TargetType="Picker">
-                <Setter Property="FontFamily" Value="GetSchwifty" />
+                <Setter Property="FontFamily" Value="Calligraphr" />
                 <Setter Property="TextColor" Value="{StaticResource textAndOutlineColor}" />
             </Style>
         </ResourceDictionary>

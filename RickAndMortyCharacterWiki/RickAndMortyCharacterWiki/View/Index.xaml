@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewmodel="clr-namespace:RickAndMortyCharacterWiki.ViewModel"
+             xmlns:viewmodel="clr-namespace:RickAndMortyCharacterWiki.ViewModel" 
+             xmlns:local="clr-namespace:RickAndMortyCharacterWiki.Custom_Renderers"
              x:Class="RickAndMortyCharacterWiki.View.Index">
     <ContentPage.BindingContext>
         <viewmodel:IndexViewModel/>
@@ -9,34 +10,44 @@
     <ContentPage.Content>
         <ScrollView BackgroundColor="{StaticResource backgroundColorPrimary}">
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Spacing="-6">
-                <Frame BorderColor="{StaticResource backgroundColorSecondary}" Padding="0,0,0,1">
+                <Frame BorderColor="{StaticResource accentColorPrimary}" Padding="0,0,0,1">
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource textAndOutlineColor}" Padding="15">
-                        <Label Text="Rick and Morty" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Large" TextColor="{StaticResource accentColorPrimary}"/>
-                        <Label Text="Character Index" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title" TextColor="{StaticResource accentColorPrimary}"/>
+                        <Label Text="Rickipedia" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title" FontFamily="GetSchwifty" TextColor="{StaticResource accentColorPrimary}"/>
                     </StackLayout>
                 </Frame>
-                <StackLayout 
-                    Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10">
-                    <Label Text="Filter by:" FontAttributes="Bold" FontSize="Small" HorizontalOptions="FillAndExpand" VerticalOptions="Center"   />
-                    <Picker Title="Gender" ItemsSource="{Binding Genders}" HorizontalOptions="FillAndExpand" FontSize="Small"  SelectedItem="{Binding SelectedGender}"/>
-                    <Picker Title="Status" ItemsSource="{Binding Status}" HorizontalOptions="FillAndExpand" FontSize="Small"  SelectedItem="{Binding SelectedStatus}"/>
-
-                </StackLayout>
-                <StackLayout 
-                    Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Center" Margin="15">
-                    <Label Text="{Binding PagesLabel}"/>
+                <StackLayout Padding="10" HorizontalOptions="Fill">
                     <StackLayout 
-                        Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                        <ImageButton Source="leftarrow.png" IsVisible="{Binding HasPrevious}" BackgroundColor="Transparent" HorizontalOptions="Start" WidthRequest="20" Command="{Binding GetPreviousPage}"/>
-                        <ImageButton Source="rightarrow.png" IsVisible="{Binding HasNext}" BackgroundColor="Transparent"  HorizontalOptions="End" WidthRequest="20" Command="{Binding GetNextPage}"/>
+                        Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0">
+                        <Image Source="filter.png" VerticalOptions="Center" WidthRequest="16" HeightRequest="16"/>
+                        <Frame Margin="5" Padding="0" OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource backgroundColorPrimary}" HasShadow="True" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                            <StackLayout Orientation="Horizontal">
+                                <Picker Title="Gender" ItemsSource="{Binding Genders}" TextColor="{StaticResource textAndOutlineColor}" HorizontalOptions="FillAndExpand" FontSize="Small"  SelectedItem="{Binding SelectedGender}"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Padding="0" OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource backgroundColorPrimary}" HasShadow="True" HorizontalOptions="StartAndExpand" Margin="0"  VerticalOptions="Center">
+                                <StackLayout Orientation="Horizontal">
+                                <Picker Title="Status" ItemsSource="{Binding Status}" TextColor="{StaticResource textAndOutlineColor}" HorizontalOptions="FillAndExpand" FontSize="Small"  SelectedItem="{Binding SelectedStatus}"/>
+                                </StackLayout>
+                            </Frame>
                     </StackLayout>
+                    <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" >
+                        <Frame Padding="0" OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource backgroundColorPrimary}" HasShadow="True" HorizontalOptions="StartAndExpand" Margin="0"  VerticalOptions="Center">
+                            <local:NoUnderlineSearchBar x:Name="searchBar" Margin="-5,5,0,0"
+                        Placeholder="Search name" HorizontalOptions="Start"  Text="{Binding SearchTerm}" FontFamily="Calligraphr" FontSize="Small" 
+                        HeightRequest="35" VerticalOptions="Center" />
+                        </Frame>
+                    </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout HorizontalOptions="Center" IsVisible="{Binding NoResults}">
+                    <Label Text="{Binding NoResultsMessage}" Margin="10"/>
                 </StackLayout>
-                <CollectionView ItemsSource="{Binding Characters}" SelectionMode="Single" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}" Margin="5" VerticalOptions="Fill">
+                <CollectionView ItemsSource="{Binding Characters}" IsVisible="{Binding ShowCharacterList}" SelectionMode="Single" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}" Margin="5" VerticalOptions="Fill">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <ContentView>
                                 <Frame CornerRadius="10" Margin="5" Padding="10"
-                               OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource backgroundColorSecondary}">
+                                    OutlineColor="{StaticResource textAndOutlineColor}" BackgroundColor="{StaticResource accentColorPrimary}">
                                     <StackLayout
                                     Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                         <ContentView  HorizontalOptions="Fill" WidthRequest="60" VerticalOptions="Center">
@@ -81,6 +92,16 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                <!--Pagination-->
+                <StackLayout 
+                    Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Center" Margin="15">
+                    <Label Text="{Binding PagesLabel}" IsVisible="{Binding ShowCharacterList}" />
+                    <StackLayout 
+                        Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <ImageButton Source="leftarrow.png" IsVisible="{Binding HasPrevious}" BackgroundColor="Transparent" HorizontalOptions="Start" WidthRequest="20" Command="{Binding GetPreviousPage}"/>
+                        <ImageButton Source="rightarrow.png" IsVisible="{Binding HasNext}" BackgroundColor="Transparent"  HorizontalOptions="End" WidthRequest="20" Command="{Binding GetNextPage}"/>
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

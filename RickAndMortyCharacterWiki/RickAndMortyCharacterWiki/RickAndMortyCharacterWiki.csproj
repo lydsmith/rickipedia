@@ -11,10 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Font\Calligraphr-Regular.ttf" />
     <None Remove="Assets\Font\get_schwifty.ttf" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\Font\Calligraphr-Regular.ttf" />
     <EmbeddedResource Include="Assets\Font\get_schwifty.ttf" />
   </ItemGroup>
 

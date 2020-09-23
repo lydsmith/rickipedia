@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RickAndMortyCharacterWiki.ViewModel
@@ -22,7 +24,7 @@ namespace RickAndMortyCharacterWiki.ViewModel
             GetCharacters();
             GetPreviousPage = new Command(previousPage);
             GetNextPage = new Command(nextPage);
-        }
+    }
 
         private ObservableCollection<Character> characters;
         public ObservableCollection<Character> Characters
@@ -138,6 +140,31 @@ namespace RickAndMortyCharacterWiki.ViewModel
                 SelectedCharacter = null;
             }
         }
+        private string searchTerm;
+        public string SearchTerm
+        {
+            get { return searchTerm; }
+            set
+            {
+                searchTerm = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SearchTerm"));
+                GetCharacters(true);
+            }
+        }
+        private string noResultsMessage;
+        public string NoResultsMessage
+        {
+            get { return noResultsMessage; }
+            set
+            {
+                noResultsMessage = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NoResultsMessage"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NoResults"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShowCharacterList"));
+            }
+        }
+        public bool NoResults => !String.IsNullOrEmpty(noResultsMessage);
+        public bool ShowCharacterList => !NoResults;
         public string PagesLabel => $"Page {PageNumber} of {TotalPages}";
 
         public Command GetPreviousPage { private set; get; }
@@ -179,11 +206,23 @@ namespace RickAndMortyCharacterWiki.ViewModel
             {
                 //goto page 1 if filtering or if first call
                 if (filterUpdated || PageNumber == 0) { PageNumber = 1; }
-                var response = await service.GetCharacters(PageNumber, SelectedGender, SelectedStatus);
-                TotalPages = response.info.pages;
-                HasNext = !string.IsNullOrEmpty(response.info.next);
-                HasPrevious = !string.IsNullOrEmpty(response.info.prev);
-                Characters = response.results;
+                var response = await service.GetCharacters(PageNumber, SelectedGender, SelectedStatus, SearchTerm);
+                if (response == null)
+                {
+                    NoResultsMessage = "No results were found.";
+                    PageNumber = 0;
+                    TotalPages = 0;
+                    HasNext = false;
+                    HasPrevious = false;
+                }
+                else
+                {
+                    NoResultsMessage = String.Empty;
+                    TotalPages = response.info.pages;
+                    HasNext = !string.IsNullOrEmpty(response.info.next);
+                    HasPrevious = !string.IsNullOrEmpty(response.info.prev);
+                    Characters = response.results;
+                }
             }
             catch (Exception e)
             {

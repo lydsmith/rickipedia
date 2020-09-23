@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="ApplicationName">Rick and Morty Character Index</string>
+  <string name="ApplicationName">Rickipedia</string>
+  <string name="SearchString">Search names</string>
 </resources>

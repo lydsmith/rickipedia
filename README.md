@@ -14,7 +14,7 @@ This repo contains an APK file which can be sideloaded directly onto an Android 
 
 1. Clone the repo via HTTPS using the command:
 ```
- git clone https://github.com/lydsmith/RickAndMortyCharacterWiki.git
+ git clone https://github.com/lydsmith/rickipedia.git
 ```
 2. Ensure you have Visual Studio 2019 with Mobile Development installed. If you haven’t got this installed, go to Visual Studio Installer, find your version of Visual Studio and Select ‘Modify’. This will take you to a screen where you can add Mobile Development to your setup.
 Once you have VS2019 set up you can load the Xamarin Project into Visual Studio by selecting the solution file (.sln). You may need to download, install or update your Android SDK to get the Android project working. 
